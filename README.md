@@ -5,7 +5,7 @@ The SMS Backup &amp; Restore app has the option to embed images, videos, etc tha
 
 For now, the types this application looks for to extract are:  png, jpeg, gif, and 3gpp.  If you know your way around the code, just add more types as you find them.  These are the only types I found in a few different backups so far.
 
-**Note**
+**Note**   
 You must remove the following XSL stylesheet line from your XML file, as TinyXML (the parser used in this app) does not handle this.
 ```
 <?xml-stylesheet type="text/xsl" href="sms.xsl"?>
@@ -22,13 +22,13 @@ cd build
 cmake ..
 make
 ```
-*Windows*
-1. Run the CMake GUI
-2. Choose the source (location of the `CMakeLists.txt` file)
-3. Choose the binary directories (usually just append `\build`)
-4. Click Configure (and choose your installed C++ compiler)
-5. Click Generate
-6. Navigate to the binary directory and open your generated project files
+*Windows*   
+1. Run the CMake GUI   
+2. Choose the source (location of the `CMakeLists.txt` file)   
+3. Choose the binary directories (usually just append `\build`)   
+4. Click Configure (and choose your installed C++ compiler)   
+5. Click Generate   
+6. Navigate to the binary directory and open your generated project files   
 
 
 ### Usage
