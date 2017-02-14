@@ -2,6 +2,7 @@
     Base64 related code written by DaedalusAlpha (http://stackoverflow.com/a/31322410/1544725)
 */
 
+#include <algorithm>
 #include <iostream>
 #include <fstream>
 #include <vector>
@@ -11,6 +12,8 @@
 #include <map>
 
 #include "tinyxml2.h"
+
+#pragma warning(disable:4996)
 
 static const unsigned char BASE64[] = { 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255,
                                         255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255,
@@ -59,7 +62,7 @@ std::vector<unsigned char> base64Decode(std::string inputString)
 std::string getDateFromEpoch(const std::string &epochStr)
 {
     char buffer[80];
-    struct tm timeinfo;
+    struct tm *timeinfo;
     time_t t;
     unsigned long long epoch64;
     std::stringstream ss(epochStr);
@@ -67,8 +70,8 @@ std::string getDateFromEpoch(const std::string &epochStr)
     ss >> epoch64;
     epoch64 /= 1000;
     t = epoch64;
-    localtime_s(&timeinfo, &t);
-    strftime(buffer, 80, "%Y%m%d_%I%M%S", &timeinfo);
+    timeinfo = localtime(&t);
+    strftime(buffer, 80, "%Y%m%d_%I%M%S", timeinfo);
     std::string ret(buffer);
 
     return ret;
@@ -219,6 +222,9 @@ int main(int argc, char* argv[])
             xmlFile = argv[i];
         }
     }
+
+    std::replace(xmlFile.begin(), xmlFile.end(), '\\', '/');
+    std::replace(destDir.begin(), destDir.end(), '\\', '/');
 
     return parseFile(xmlFile, destDir);
 }
