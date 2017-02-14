@@ -7,7 +7,7 @@ For now, the types this application looks for to extract are:  png, jpeg, gif, a
 
 **Note**   
 You must remove the following XSL stylesheet line from your XML file, as TinyXML (the parser used in this app) does not handle this.
-```
+```xml
 <?xml-stylesheet type="text/xsl" href="sms.xsl"?>
 ```
 
