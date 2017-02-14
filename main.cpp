@@ -120,7 +120,7 @@ int parseFile(const std::string &fileName, const std::string &destDir)
 
     smsesElem = doc.FirstChildElement("smses");
 
-    if (smsesElem == nullptr)
+    if (smsesElem == NULL)
     {
         std::cout << "XML Error: missing <smses>" << std::endl;
         return 1;
@@ -133,7 +133,7 @@ int parseFile(const std::string &fileName, const std::string &destDir)
     types.push_back("image/gif");
     types.push_back("video/3gpp");
 
-    while (mmsElem != nullptr)
+    while (mmsElem != NULL)
     {
         dateStr = getDateFromEpoch(mmsElem->Attribute("date"));
         mmsElem->QueryUnsignedAttribute("text_only", &textOnly);
@@ -144,7 +144,7 @@ int parseFile(const std::string &fileName, const std::string &destDir)
 
             partElem = partsElem->FirstChildElement("part");
 
-            while (partElem != nullptr)
+            while (partElem != NULL)
             {
                 partType = partElem->Attribute("ct");
                 partTypeCount[partType]++;
@@ -163,7 +163,7 @@ int parseFile(const std::string &fileName, const std::string &destDir)
 
                     fileData = base64Decode(partElem->Attribute("data"));
                     fileDataStr.assign(fileData.begin(), fileData.end());
-                    std::ofstream fileFile(fileFilename, std::ios::out | std::ios::binary);
+                    std::ofstream fileFile(fileFilename.c_str(), std::ios::out | std::ios::binary);
                     fileFile.write(fileDataStr.c_str(), fileDataStr.length());
                     fileCount++;
                     incrementDisplay(textCount, fileCount);
